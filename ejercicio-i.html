@@ -1,0 +1,50 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="ejercicio-i">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <ul>
+      <li on-click="alertLi" id="C1" dataId="US" dataDialCode="1">USA</li>
+      <li on-click="alertLi" id="C2" dataId="CA" dataDialCode="1">Canada</li>
+      <li on-click="alertLi" id="C3" dataId="FF" dataDialCode="3">Francia</li>
+    </ul>
+  </template>
+
+  <script>
+    /**
+     * `ejercicio-i`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class EjercicioI extends Polymer.Element {
+      static get is() { return 'ejercicio-i'; }
+      static get properties() {
+        return {
+          
+        };
+      }
+
+      alertLi(e){
+        let listEvent = new CustomEvent('event-list',{
+          bubbles: true,
+          composed: true,
+          detail: e.path[0].attributes
+        });
+        this.dispatchEvent(listEvent);
+
+        let data = e.path[0].attributes;
+        console.log(data);
+        alert(data.id.nodeValue+" "+ data.dataId.nodeValue+" "+ data.dataDialCode.nodeValue);
+      }
+    }
+
+    window.customElements.define(EjercicioI.is, EjercicioI);
+  </script>
+</dom-module>
